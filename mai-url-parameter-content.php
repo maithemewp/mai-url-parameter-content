@@ -149,6 +149,9 @@ final class Mai_URL_Parameter_Content_Plugin {
 		// Setup the updater.
 		$updater = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/maithemewp/mai-url-parameter-content/', __FILE__, 'mai-url-parameter-content' );
 
+		// Set branch.
+		$updater->setBranch( 'main' );
+
 		// Maybe set github api token.
 		if ( defined( 'MAI_GITHUB_API_TOKEN' ) ) {
 			$updater->setAuthentication( MAI_GITHUB_API_TOKEN );
