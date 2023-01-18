@@ -1,0 +1,17 @@
+{
+  "name": "acf/mai-upc",
+  "title": "Mai URL Parameter Content",
+  "description": "Display dynamic content based on URL parameters. Use {param_name} to display a parameter's value in your content.",
+  "category": "widgets",
+  "keywords": [ "url", "parameter", "query" ],
+  "icon": "randomize",
+  "textdomain": "mai-url-parameter-content",
+  "acf": {
+    "mode": "preview",
+    "renderCallback": "mai_do_upc_block"
+  },
+  "supports": {
+    "align": false,
+    "customClassName": false
+  }
+}
