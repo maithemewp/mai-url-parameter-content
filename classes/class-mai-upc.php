@@ -21,7 +21,6 @@ class Mai_UPC {
 		// Get args.
 		$args = shortcode_atts(
 			[
-				'class'   => '',
 				'params'  => [],
 				'preview' => false,
 			],

@@ -31,7 +31,6 @@ function mai_register_upc_block() {
  */
 function mai_do_upc_block( $attributes, $content, $is_preview, $post_id, $wp_block, $context ) {
 	$args            = [];
-	$args['class']   = isset( $attributes['className'] ) ? $attributes['className']: '';
 	$args['params']  = get_field( 'maiupc' );
 	$args['preview'] = $is_preview;
 	$template        = [ [ 'core/paragraph', [], [] ] ];
