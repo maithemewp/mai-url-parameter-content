@@ -29,10 +29,9 @@ class Mai_UPC {
 		);
 
 		// Sanitize args.
-		$args['class']   = esc_attr( $args['class'] );
 		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
 
-		// Build params.
+		// Build and sanitize params.
 		$params = [];
 
 		if ( $args['params'] ) {
@@ -84,7 +83,7 @@ class Mai_UPC {
 		}
 
 		// Bail if no params.
-		if ( empty( $this->args['params'] || empty( $_GET ) ) ) {
+		if ( empty( $this->args['params'] ) || empty( $_GET ) ) {
 			return;
 		}
 
