@@ -85,7 +85,7 @@ class Mai_UPC {
 		}
 
 		// Bail if no params.
-		if ( empty( $_GET ) ) {
+		if ( empty( $this->args['params'] || empty( $_GET ) ) ) {
 			return;
 		}
 
