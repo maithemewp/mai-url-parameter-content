@@ -31,7 +31,7 @@ function mai_register_upc_block() {
  */
 function mai_do_upc_block( $attributes, $content, $is_preview, $post_id, $wp_block, $context ) {
 	$args            = [];
-	$args['params']  = get_field( 'maiupc' );
+	$args['params']  = (array) get_field( 'maiupc' );
 	$args['preview'] = $is_preview;
 	$template        = [ [ 'core/paragraph', [], [] ] ];
 	$inner           = sprintf( '<InnerBlocks template="%s" />', esc_attr( wp_json_encode( $template ) ) );
