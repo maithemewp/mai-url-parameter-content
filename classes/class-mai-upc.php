@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || die;
 class Mai_UPC {
 	protected $args;
 	protected $content;
+	protected $valid; // If URL params are met/validated.
 
 	/**
 	 * Class constructor.
@@ -22,6 +23,7 @@ class Mai_UPC {
 		$args = shortcode_atts(
 			[
 				'params'  => [],
+				'hide'    => true,
 				'preview' => false,
 			],
 			$args,
@@ -29,6 +31,7 @@ class Mai_UPC {
 		);
 
 		// Sanitize args.
+		$args['hide']    = rest_sanitize_boolean( $args['hide'] );
 		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
 
 		// Build and sanitize params.
@@ -56,6 +59,7 @@ class Mai_UPC {
 		// Set props.
 		$this->args    = $args;
 		$this->content = $content;
+		$this->valid   = false;
 	}
 
 	/**
@@ -82,6 +86,28 @@ class Mai_UPC {
 			return $this->content;
 		}
 
+		// Validate.
+		$this->validate();
+
+		// Showing. URL is valid and not hiding content, so we show the content.
+		if ( $this->valid && ! $this->args['hide'] ) {
+			return $this->get_content();
+		}
+
+		// Hiding. URL is not valid, and we hide if valid, so we show the content.
+		if ( ! $this->valid && $this->args['hide'] ) {
+			return $this->get_content();
+		}
+	}
+
+	/**
+	 * Validates the current URL.
+	 *
+	 * @since 0.2.0
+	 *
+	 * @return void
+	 */
+	function validate() {
 		// Bail if no params.
 		if ( empty( $this->args['params'] ) || empty( $_GET ) ) {
 			return;
@@ -101,9 +127,33 @@ class Mai_UPC {
 			if ( $value && strtolower( (string) $value ) !== strtolower( (string) $_GET[ $key ] ) ) {
 				return;
 			}
+		}
+
+		$this->valid = true;
+	}
+
+	/**
+	 * Gets content with placeholders replaced.
+	 *
+	 * @since 0.2.0
+	 *
+	 * @return string
+	 */
+	function get_content() {
+		// Handles value checks and string replacements.
+		foreach ( $this->args['params'] as $key => $value ) {
+			$replace = '';
+
+			// Replace all param content.
+			// We can't check if valid because some content
+			// will show if not valid when set to hide if valid.
+			// The latter is definitely an edge-case, but it's possible.
+			if ( isset( $_GET[ $key ] ) ) {
+				$replace = wp_kses_post( $_GET[ $key ] );
+			}
 
 			// Replace placeholder content.
-			$this->content = str_replace( sprintf( '{%s}', $key ), wp_kses_post( $value) , $this->content );
+			$this->content = str_replace( sprintf( '{%s}', $key ), $replace, $this->content );
 		}
 
 		return $this->content;

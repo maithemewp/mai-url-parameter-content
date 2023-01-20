@@ -31,7 +31,8 @@ function mai_register_upc_block() {
  */
 function mai_do_upc_block( $attributes, $content, $is_preview, $post_id, $wp_block, $context ) {
 	$args            = [];
-	$args['params']  = (array) get_field( 'maiupc' );
+	$args['params']  = (array) get_field( 'params' );
+	$args['hide']    = (bool) get_field( 'hide' );
 	$args['preview'] = $is_preview;
 	$template        = [ [ 'core/paragraph', [], [] ] ];
 	$inner           = sprintf( '<InnerBlocks template="%s" />', esc_attr( wp_json_encode( $template ) ) );
@@ -63,7 +64,7 @@ function mai_register_upc_field_group() {
 				[
 					'key'          => 'maiupc_parameters',
 					'label'        => __( 'URL Parameters', 'mai-url-parameter-content' ),
-					'name'         => 'maiupc',
+					'name'         => 'params',
 					'type'         => 'repeater',
 					'layout'       => 'block',
 					'min'          => 1,
@@ -85,6 +86,16 @@ function mai_register_upc_field_group() {
 							'parent_repeater' => 'maiupc_parameters',
 						],
 					],
+				],
+				[
+					'key'           => 'maiupc_hide',
+					'label'         => __( 'Show/Hide the inner content if the above conditions are met', 'mai-url-parameter-content' ),
+					'name'          => 'hide',
+					'type'          => 'true_false',
+					'default_value' => 0,
+					'ui_on_text'    => __( 'Hide', 'mai-url-parameter-content' ),
+					'ui_off_text'   => __( 'Show', 'mai-url-parameter-content' ),
+					'ui'            => 1,
 				],
 			],
 			'location' => [
