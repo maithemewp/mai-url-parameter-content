@@ -3,8 +3,8 @@
 /**
  * Plugin Name:     Mai URL Parameter Content
  * Plugin URI:      https://bizbudding.com/
- * Description:     Display dynamic content based on URL parameters.
- * Version:         0.1.0
+ * Description:     Show or hide dynamic content based on URL parameters.
+ * Version:         0.2.0
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -89,7 +89,7 @@ final class Mai_URL_Parameter_Content_Plugin {
 	private function setup_constants() {
 		// Plugin version.
 		if ( ! defined( 'MAI_UPC_PLUGIN_VERSION' ) ) {
-			define( 'MAI_UPC_PLUGIN_VERSION', '0.1.0' );
+			define( 'MAI_UPC_PLUGIN_VERSION', '0.2.0' );
 		}
 
 		// Plugin Folder Path.
