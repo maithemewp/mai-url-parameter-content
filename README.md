@@ -24,11 +24,12 @@ add_action( 'wp_head', function() {
 		return;
 	}
 
-	// Build assocative array of 'customclass' => [ 'param1 => 'value1, 'param2 => 'value2' ].
+	// Build assocative array of 'custom-class' => [ 'param1 => 'value1, 'param2 => 'value2' ].
 	$links = [
 		'some-custom-class' => [
-			'param1' => 'value1',
-			'param2' => 'value2',
+			'utm_source'   => 'website',
+			'utm_medium'   => 'cta',
+			'utm_campaign' => 'affiliate',
 		],
 	];
 
