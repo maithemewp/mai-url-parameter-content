@@ -102,7 +102,7 @@ class Mai_URL_Parameter_Adder {
 		}
 
 		// Save new HTML without html/body wrap.
-		$block_content = substr( $dom->saveHTML(), 12, -15 );
+		$block_content = substr( $dom->saveHTML( $dom->documentElement ), 12, -15 );
 
 		return $block_content;
 	}
