@@ -27,9 +27,11 @@ add_action( 'wp_head', function() {
 	// Build assocative array of 'custom-class' => [ 'param1 => 'value1, 'param2 => 'value2' ].
 	$links = [
 		'some-custom-class' => [
-			'utm_source'   => 'website',
-			'utm_medium'   => 'cta',
-			'utm_campaign' => 'affiliate',
+			'utm_source'   => 'website',   // e.g. newsletter, twitter, google, etc.
+			'utm_medium'   => 'cta',       // e.g. email, social, cpc, etc.
+			'utm_campaign' => 'affiliate', // e.g. promotion, sale, etc.
+			'utm_content'  => '',          // (optional) Any call-to-action or headline, e.g. buy-now.
+			'utm_term'     => '',          // (optional) Keywords for your paid search campaigns.
 		],
 	];
 
