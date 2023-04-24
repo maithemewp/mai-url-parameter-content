@@ -16,7 +16,7 @@ In the below example, `tricky-footer` is a custom class added to the Advanced se
 /**
  * Adds URL parameters to blocks with custom classes.
  *
- * @param  array $links
+ * @param array $links
  * [
  * 		'custom-class' => [
  * 			'param1 => 'value1,
