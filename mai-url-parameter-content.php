@@ -125,6 +125,7 @@ final class Mai_URL_Parameter_Content_Plugin {
 	 */
 	public function hooks() {
 		add_action( 'plugins_loaded', [ $this, 'updater' ] );
+		add_action( 'wp_head',        [ $this, 'add_params' ] );
 	}
 
 	/**
@@ -145,7 +146,7 @@ final class Mai_URL_Parameter_Content_Plugin {
 		}
 
 		// Setup the updater.
-		$updater = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/maithemewp/mai-url-parameter-content/', __FILE__, 'mai-url-parameter-content' );
+		$updater = PucFactory::buildUpdateChecker( 'https://github.com/maithemewp/mai-url-parameter-content/', __FILE__, 'mai-url-parameter-content' );
 
 		// Set branch.
 		$updater->setBranch( 'main' );
@@ -164,6 +165,24 @@ final class Mai_URL_Parameter_Content_Plugin {
 				}
 			);
 		}
+	}
+
+	/**
+	 * Check for URL parameter classes and links.
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	public function add_params() {
+		$links = apply_filters( 'mai_url_parameter_links', [] );
+
+		if ( ! $links ) {
+			return;
+		}
+
+		$class = new Mai_URL_Parameter_Adder( $links );
+		$class->run();
 	}
 }
 

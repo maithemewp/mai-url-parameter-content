@@ -90,7 +90,7 @@ class Mai_URL_Parameter_Adder {
 			$href = $element->getAttribute( 'href' );
 
 			// Skip if not an absolute url.
-			if ( false === strpos ( $href, 'http' ) ) {
+			if ( false === strpos( $href, 'http' ) ) {
 				continue;
 			}
 

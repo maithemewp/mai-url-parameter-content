@@ -16,16 +16,23 @@ In the below example, `tricky-footer` is a custom class added to the Advanced se
 /**
  * Adds URL parameters to blocks with custom classes.
  *
- * @return void
+ * @param  array $links
+ * [
+ * 		'custom-class' => [
+ * 			'param1 => 'value1,
+ * 			'param2 => 'value2',
+ * 		],
+ *		'another-class' => [
+ * 			'param1 => 'value1,
+ * 			'param2 => 'value2',
+ * 			'param3 => 'value3',
+ * 		],
+ * ]
+ *
+ * @return array
  */
-add_action( 'wp_head', function() {
-	// Bail if Mai URL Parameter Adder is not available.
-	if ( ! class_exists( 'Mai_URL_Parameter_Adder' ) ) {
-		return;
-	}
-
-	// Build assocative array of 'custom-class' => [ 'param1 => 'value1, 'param2 => 'value2' ].
-	$links = [
+add_filter( 'mai_url_parameter_links', function( $links ) {
+	$new = [
 		'some-custom-class' => [
 			'utm_source'   => 'website',   // e.g. newsletter, twitter, google, etc.
 			'utm_medium'   => 'cta',       // e.g. email, social, cpc, etc.
@@ -33,9 +40,14 @@ add_action( 'wp_head', function() {
 			'utm_content'  => '',          // (optional) Any call-to-action or headline, e.g. buy-now.
 			'utm_term'     => '',          // (optional) Keywords for your paid search campaigns.
 		],
+		'another-custom-class' => [
+			'utm_source'   => 'website',
+			'utm_medium'   => 'cta',
+			'utm_campaign' => 'seo',
+			'utm_content'  => 'check-this-out',
+		],
 	];
 
-	$class = new Mai_URL_Parameter_Adder( $links );
-	$class->run();
+	return array_merge( $links, $new );
 });
 ```
