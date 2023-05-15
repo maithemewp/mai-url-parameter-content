@@ -47,6 +47,10 @@ class Mai_URL_Parameter_Adder {
 	 * @return string The modified block HTML.
 	 */
 	function render_block( $block_content, $block ) {
+		if ( ! $block_content ) {
+			return $block_content;
+		}
+
 		if ( ! isset( $block['attrs']['className'] ) || empty( $block['attrs']['className'] ) ) {
 			return $block_content;
 		}
@@ -68,11 +72,23 @@ class Mai_URL_Parameter_Adder {
 		// Modify state.
 		$libxml_previous_state = libxml_use_internal_errors( true );
 
-		// Load the content in the document HTML.
-		$dom->loadHTML( mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'UTF-8' ) );
+		// Encode.
+		$html = mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'UTF-8' );
 
-		// Remove <!DOCTYPE.
-		$dom->removeChild( $dom->doctype );
+		// Load the content in the document HTML.
+		$dom->loadHTML( "<div>$html</div>" );
+
+		// Handle wraps.
+		$container = $dom->getElementsByTagName('div')->item(0);
+		$container = $container->parentNode->removeChild( $container );
+
+		while ( $dom->firstChild ) {
+			$dom->removeChild( $dom->firstChild );
+		}
+
+		while ( $container->firstChild ) {
+			$dom->appendChild( $container->firstChild );
+		}
 
 		// Handle errors.
 		libxml_clear_errors();
@@ -101,8 +117,8 @@ class Mai_URL_Parameter_Adder {
 			$element->setAttribute( 'href', $href );
 		}
 
-		// Save new HTML without html/body wrap.
-		$block_content = substr( $dom->saveHTML( $dom->documentElement ), 12, -15 );
+		// Save new HTML.
+		$block_content = $dom->saveHTML();
 
 		return $block_content;
 	}
