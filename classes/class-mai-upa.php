@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || die;
  */
 class Mai_URL_Parameter_Adder {
 	protected $links; // Assocative array of 'customclass' => [ 'param1 => 'value1, 'param2 => 'value2' ].
+	protected $link_classes;
 
 	/**
 	 * Class constructor.
