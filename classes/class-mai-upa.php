@@ -73,6 +73,9 @@ class Mai_URL_Parameter_Adder {
 		// Modify state.
 		$libxml_previous_state = libxml_use_internal_errors( true );
 
+		// Encode.
+		$block_content = mb_encode_numericentity( $block_content, [0x80, 0x10FFFF, 0, ~0], 'UTF-8' );
+
 		// Load the content in the document HTML.
 		$dom->loadHTML( "<div>$block_content</div>" );
 
@@ -117,6 +120,7 @@ class Mai_URL_Parameter_Adder {
 
 		// Save new HTML.
 		$block_content = $dom->saveHTML();
+		$block_content = mb_convert_encoding( $block_content, 'UTF-8', 'HTML-ENTITIES' );
 
 		return $block_content;
 	}
