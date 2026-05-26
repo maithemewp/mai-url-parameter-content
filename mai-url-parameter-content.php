@@ -4,7 +4,7 @@
  * Plugin Name:     Mai URL Parameter Content
  * Plugin URI:      https://bizbudding.com/
  * Description:     Show or hide dynamic content based on URL parameters.
- * Version:         0.5.5
+ * Version:         0.5.6
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -92,7 +92,7 @@ final class Mai_URL_Parameter_Content_Plugin {
 	private function setup_constants() {
 		// Plugin version.
 		if ( ! defined( 'MAI_UPC_PLUGIN_VERSION' ) ) {
-			define( 'MAI_UPC_PLUGIN_VERSION', '0.5.5' );
+			define( 'MAI_UPC_PLUGIN_VERSION', '0.5.6' );
 		}
 
 		// Plugin Folder Path.
@@ -147,9 +147,6 @@ final class Mai_URL_Parameter_Content_Plugin {
 
 		// Setup the updater.
 		$updater = PucFactory::buildUpdateChecker( 'https://github.com/maithemewp/mai-url-parameter-content/', __FILE__, 'mai-url-parameter-content' );
-
-		// Set branch.
-		$updater->setBranch( 'main' );
 
 		// Maybe set github api token.
 		if ( defined( 'MAI_GITHUB_API_TOKEN' ) ) {
