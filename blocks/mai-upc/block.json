@@ -7,7 +7,7 @@
   "icon": "randomize",
   "textdomain": "mai-url-parameter-content",
   "acf": {
-    "mode": "preview",
+    "blockVersion": 3,
     "renderCallback": "mai_do_upc_block"
   },
   "supports": {
