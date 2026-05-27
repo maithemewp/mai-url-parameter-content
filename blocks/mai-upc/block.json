@@ -1,5 +1,4 @@
 {
-  "apiVersion": 3,
   "name": "acf/mai-upc",
   "title": "Mai URL Parameter Content",
   "description": "Display dynamic content based on URL parameters. Leave value(s) empty to only require that the parameter exists in the URL. Use {param_name} to display a parameter's value in your content.",
@@ -8,7 +7,7 @@
   "icon": "randomize",
   "textdomain": "mai-url-parameter-content",
   "acf": {
-    "mode": "preview",
+    "blockVersion": 3,
     "renderCallback": "mai_do_upc_block"
   },
   "supports": {
