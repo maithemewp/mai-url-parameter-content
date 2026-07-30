@@ -67,36 +67,7 @@ class Mai_URL_Parameter_Adder {
 			return $block_content;
 		}
 
-		// Create the new document.
-		$dom = new DOMDocument();
-
-		// Modify state.
-		$libxml_previous_state = libxml_use_internal_errors( true );
-
-		// Encode.
-		$block_content = mb_encode_numericentity( $block_content, [0x80, 0x10FFFF, 0, ~0], 'UTF-8' );
-
-		// Load the content in the document HTML.
-		$dom->loadHTML( "<div>$block_content</div>" );
-
-		// Handle wraps.
-		$container = $dom->getElementsByTagName('div')->item(0);
-		$container = $container->parentNode->removeChild( $container );
-
-		while ( $dom->firstChild ) {
-			$dom->removeChild( $dom->firstChild );
-		}
-
-		while ( $container->firstChild ) {
-			$dom->appendChild( $container->firstChild );
-		}
-
-		// Handle errors.
-		libxml_clear_errors();
-
-		// Restore.
-		libxml_use_internal_errors( $libxml_previous_state );
-
+		$dom      = maiupc_get_dom_document( $block_content );
 		$elements = $dom->getElementsByTagName( 'a' );
 
 		if ( ! $elements->length ) {
@@ -119,10 +90,7 @@ class Mai_URL_Parameter_Adder {
 		}
 
 		// Save new HTML.
-		$block_content = $dom->saveHTML();
-		$block_content = mb_convert_encoding( $block_content, 'UTF-8', 'HTML-ENTITIES' );
-
-		return $block_content;
+		return maiupc_get_dom_html( $dom );
 	}
 
 	/**

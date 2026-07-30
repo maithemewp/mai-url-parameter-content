@@ -111,6 +111,8 @@ final class Mai_URL_Parameter_Content_Plugin {
 	private function includes() {
 		// Include vendor libraries.
 		require_once __DIR__ . '/vendor/autoload.php';
+		// Functions. Loaded before classes, which call into them.
+		foreach ( glob( MAI_UPC_PLUGIN_DIR . 'includes/*.php' ) as $file ) { include $file; }
 		// Classes.
 		foreach ( glob( MAI_UPC_PLUGIN_DIR . 'classes/*.php' ) as $file ) { include $file; }
 		// Blocks.
