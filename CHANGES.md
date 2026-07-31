@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.8 (TBD)
+* Fixed: [Security] Hardened content rendering so markup that was escaped in the editor stays escaped on the front end.
+
 ## 0.5.7 (5/27/26)
 * Changed: Updated blocks to Block API v3 for WP 6.9 compatibility.
 
