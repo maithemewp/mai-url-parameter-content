@@ -5,6 +5,7 @@
  * Plugin URI:      https://bizbudding.com/
  * Description:     Show or hide dynamic content based on URL parameters.
  * Version:         0.5.7
+ * Requires PHP:    8.1
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
